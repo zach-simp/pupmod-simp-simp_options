@@ -14,7 +14,7 @@
 class simp_options::puppet (
   String $server,
   String $ca,
-  Integer $ca_port = 8141
+  Simplib::Compat::Integer $ca_port = '8141'
 ){
   validate_net_list($server)
   validate_net_list($ca)
