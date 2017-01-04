@@ -44,8 +44,11 @@
 #
 # @param pam Whether to include SIMP’s ``::pam`` class SIMP to manage ``PAM``
 #
-# @param pki Whether to include SIMP's ``::pki`` class and use ``::pki::copy``
-#   to distribute PKI certificates to the correct locations
+# @param pki Whether to include SIMP’s ``::pki`` class and use ``pki::copy`` to
+#   distribute PKI certificates to the correct locations.
+#   If false, don't include SIMP's ``::pki`` class, and don't use ``::pki::copy``.
+#   If true,  don't include SIMP's ``::pki`` class, but use ``::pki::copy``.
+#   If 'simp', include SIMP's ``::pki`` class, and use ``::pki::copy``.
 #
 # @param selinux Whether to include SIMP's ``::selinux`` class (which
 #   effectively manages the ``SELinux`` enforcement and mode) and manage
@@ -71,24 +74,24 @@
 # @author SIMP Team - https://simp-project.com
 #
 class simp_options (
-  Boolean $auditd                           = false,
-  Boolean $clamav                           = false,
-  Boolean $fips                             = false,
-  Boolean $firewall                         = false,
-  Boolean $haveged                          = false,
-  Boolean $ipsec                            = false,
-  Boolean $ipv6                             = false,
-  Boolean $kerberos                         = false,
-  Boolean $ldap                             = false,
-  Boolean $logrotate                        = false,
-  Boolean $pam                              = false,
-  Boolean $pki                              = false,
-  Boolean $selinux                          = false,
-  Boolean $sssd                             = false,
-  Boolean $stunnel                          = false,
-  Boolean $syslog                           = false,
-  Boolean $tcpwrappers                      = false,
-  Array[String] $trusted_nets               = ['127.0.0.1', '::1']
+  Boolean                       $auditd       = false,
+  Boolean                       $clamav       = false,
+  Boolean                       $fips         = false,
+  Boolean                       $firewall     = false,
+  Boolean                       $haveged      = false,
+  Boolean                       $ipsec        = false,
+  Boolean                       $ipv6         = false,
+  Boolean                       $kerberos     = false,
+  Boolean                       $ldap         = false,
+  Boolean                       $logrotate    = false,
+  Boolean                       $pam          = false,
+  Variant[Boolean,Enum['simp']] $pki          = false,
+  Boolean                       $selinux      = false,
+  Boolean                       $sssd         = false,
+  Boolean                       $stunnel      = false,
+  Boolean                       $syslog       = false,
+  Boolean                       $tcpwrappers  = false,
+  Simplib::Netlist              $trusted_nets = ['127.0.0.1', '::1']
 ){
   validate_net_list($trusted_nets)
 
@@ -100,6 +103,10 @@ class simp_options (
 
   if $ldap {
     include '::simp_options::ldap'
+  }
+
+  if $pki {
+    include '::simp_options::pki'
   }
 
   if $syslog {
