@@ -1,3 +1,6 @@
+* Wed Feb 01 2017 Nick Markowski <nmarkowski@keywcorp.com> - 1.0.1-0
+- Updated ldap *_dn defaults to use simplib::domain_to_dn()
+
 * Mon Jan 30 2017 Nick Miller <nick.miller@onyxpoint.com> - 1.0.1-0
 - Added more strict Puppet and PE requirements, pinning to Puppet 4.7+ and
   PE 2016.4.0+
