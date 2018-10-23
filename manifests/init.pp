@@ -42,6 +42,9 @@
 #
 # @param pam Whether to include SIMP's ``::pam`` class SIMP to manage ``PAM``
 #
+# @param oath Indicates to other modules (``::pam`` and ``::ssh`) that they
+#   should add pam_oath.so to their pam stack to enfore 2 factor authentication
+#
 # @param pki Whether to include SIMP's ``::pki`` class and use ``pki::copy`` to
 #   distribute PKI certificates to the correct locations.
 #   If false, don't include SIMP's ``::pki`` class, and don't use ``::pki::copy``.
@@ -86,6 +89,7 @@ class simp_options (
   Boolean                       $ldap           = false,
   Boolean                       $logrotate      = false,
   Boolean                       $pam            = false,
+  Boolean                       $oath           = false,
   Variant[Boolean,Enum['simp']] $pki            = false,
   Boolean                       $sssd           = false,
   Boolean                       $stunnel        = false,

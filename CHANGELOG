@@ -1,3 +1,6 @@
+* Tue Oct 23 2018 Zach <turtles.be.the.best@gmail.com> - 1.2.3-0
+- Added simp_options::oath for pam_oath consistency across modules
+
 * Fri Aug 24 2018 Nick Miller <nick.miller@onyxpoint.com> - 1.2.2-0
 - Add Puppet 5 and OEL Support
 
